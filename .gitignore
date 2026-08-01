@@ -1,0 +1,24 @@
+# Dependencies
+**/node_modules
+
+# Build
+**/dist
+**/coverage
+
+# Environment
+**/.env
+**/.env.*
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Vite
+**/.vite
+
+# IDE
+.vscode
+.idea
+**/.npmrc
