@@ -31,7 +31,7 @@ export class CalculatorService {
     return Math.sqrt(a);
   }
 
-  static percentage(a: number): number {
-    return a / 100;
+  static percentage(a: number, b: number): number {
+    return a * (b / 100);
   }
 }

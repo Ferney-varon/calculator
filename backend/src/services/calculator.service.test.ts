@@ -37,7 +37,7 @@ describe('CalculatorService', () => {
     expect(() => CalculatorService.sqrt(-9)).toThrow('Square root of negative number is not real');
   });
 
-  it('should correctly calculate percentage', () => {
-    expect(CalculatorService.percentage(50)).toBe(0.5);
+  it('should correctly calculate percentage of a number', () => {
+    expect(CalculatorService.percentage(200, 15)).toBe(30);
   });
 });

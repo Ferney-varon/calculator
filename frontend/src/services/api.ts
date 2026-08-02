@@ -27,8 +27,8 @@ export const calculatorApi = {
     const response = await axios.post(`${API_BASE_URL}/sqrt`, { a });
     return response.data;
   },
-  percentage: async (a: number) => {
-    const response = await axios.post(`${API_BASE_URL}/percentage`, { a });
+  percentage: async (a: number, b: number) => {
+    const response = await axios.post(`${API_BASE_URL}/percentage`, { a, b });
     return response.data;
   }
 };

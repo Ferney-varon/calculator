@@ -96,8 +96,8 @@ export class CalculatorController {
 
   static percentage(req: Request, res: Response, next: NextFunction) {
     try {
-      const { a } = validateUnaryInput(req);
-      const result = CalculatorService.percentage(a);
+      const { a, b } = validateInput(req);
+      const result = CalculatorService.percentage(a, b);
       res.json({ result });
     } catch (error) {
       next(error);

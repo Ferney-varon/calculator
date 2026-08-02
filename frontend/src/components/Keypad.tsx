@@ -8,7 +8,7 @@ interface KeypadProps {
   onClear: () => void;
   onEqual: () => void;
   onToggleSign: () => void;
-  onUnaryOperation: (op: 'sqrt' | 'percentage') => void;
+  onUnaryOperation: (op: 'sqrt') => void;
   isExpanded: boolean;
   onToggleExpand: () => void;
   activeOperator: Operator;
@@ -58,7 +58,13 @@ export const Keypad: React.FC<KeypadProps> = ({
           className={`btn btn-operator ${activeOperator === '-' ? 'active' : ''}`}
           onClick={() => onOperator('-')}
         >−</button>
-        {isExpanded && <button className="btn btn-operator advanced-col" onClick={() => onUnaryOperation('percentage')}>%</button>}
+        {isExpanded && (
+          <button 
+            className={`btn btn-operator advanced-col ${activeOperator === '%' ? 'active' : ''}`}
+            onClick={() => onOperator('%')}
+            title="Calculate percentage (e.g. 200 % 15 = 30)"
+          >%</button>
+        )}
       </div>
       <div className="keypad-row">
         <button className="btn" onClick={() => onDigit('1')}>1</button>

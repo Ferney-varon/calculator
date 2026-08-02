@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { calculatorApi } from '../services/api';
 
-export type Operator = '+' | '-' | '*' | '/' | '^' | null;
+export type Operator = '+' | '-' | '*' | '/' | '^' | '%' | null;
 
 export const useCalculator = () => {
   const [displayValue, setDisplayValue] = useState<string>('0');
@@ -66,6 +66,9 @@ export const useCalculator = () => {
           case '^':
             result = await calculatorApi.exponentiate(parseFloat(currentValue), inputValue);
             break;
+          case '%':
+            result = await calculatorApi.percentage(parseFloat(currentValue), inputValue);
+            break;
         }
         if (result) {
           setDisplayValue(String(result.result));
@@ -91,15 +94,13 @@ export const useCalculator = () => {
     }
   };
 
-  const performUnaryOperation = async (operation: 'sqrt' | 'percentage') => {
+  const performUnaryOperation = async (operation: 'sqrt') => {
     const inputValue = parseFloat(displayValue);
     setIsLoading(true);
     try {
       let result = null;
       if (operation === 'sqrt') {
         result = await calculatorApi.sqrt(inputValue);
-      } else if (operation === 'percentage') {
-        result = await calculatorApi.percentage(inputValue);
       }
       if (result) {
         setDisplayValue(String(result.result));
