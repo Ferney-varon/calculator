@@ -1,111 +1,228 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --bg-dark: #121212;
+  --calc-bg: rgba(255, 255, 255, 0.05);
+  --calc-border: rgba(255, 255, 255, 0.1);
+  --btn-bg: rgba(255, 255, 255, 0.1);
+  --btn-hover: rgba(255, 255, 255, 0.2);
+  --btn-active: rgba(255, 255, 255, 0.3);
+  --btn-op-bg: #ff9f0a;
+  --btn-op-hover: #ffb742;
+  --btn-action-bg: #a5a5a5;
+  --btn-action-hover: #d4d4d2;
+  --text-main: #ffffff;
+  --text-dark: #000000;
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --error: #ff453a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+* {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   margin: 0;
+  /* cool animated background */
+  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+  font-weight: 300;
+  letter-spacing: 2px;
+  opacity: 0.8;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+/* Calculator Container */
+.calculator-container {
+  width: 320px;
+  background: var(--calc-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 30px;
+  border: 1px solid var(--calc-border);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.calculator-container.expanded {
+  width: 390px;
+}
+
+@media (max-width: 420px) {
+  .calculator-container {
+    width: 90vw;
+  }
+  .calculator-container.expanded {
+    width: 95vw;
+  }
+}
+
+/* Display */
+.calculator-display {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  background: transparent;
+  padding: 20px 10px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.display-value {
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text-main);
+  text-align: right;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.display-value.error {
+  color: var(--error);
+  font-size: 1.5rem;
+}
+
+.loading-indicator {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  font-size: 1rem;
+  opacity: 0.5;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 0.2; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.2; }
+}
+
+/* Keypad */
+.calculator-keypad {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.keypad-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.calculator-container.expanded .keypad-row {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.btn {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: none;
+  background: var(--btn-bg);
+  color: var(--text-main);
+  font-size: 1.5rem;
+  font-weight: 400;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  user-select: none;
+}
+
+.btn:hover {
+  background: var(--btn-hover);
+  transform: scale(1.05);
+}
+
+.btn:active {
+  background: var(--btn-active);
+  transform: scale(0.95);
+}
+
+.btn-zero {
+  grid-column: span 2;
+  aspect-ratio: auto;
+  border-radius: 40px;
+  justify-content: flex-start;
+  padding-left: 30px;
+}
+
+.btn-operator {
+  background: var(--btn-op-bg);
+  color: var(--text-main);
+  font-weight: 500;
+  font-size: 1.8rem;
+}
+
+.btn-operator:hover {
+  background: var(--btn-op-hover);
+}
+
+.btn-operator.active {
+  background: var(--text-main);
+  color: var(--btn-op-bg);
+}
+
+.btn-action {
+  background: var(--btn-action-bg);
+  color: var(--text-dark);
+}
+
+.btn-action:hover {
+  background: var(--btn-action-hover);
+}
+
+.btn:disabled {
+  opacity: 0;
+  cursor: default;
+}
+
+.advanced-col {
+  animation: fadeIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
