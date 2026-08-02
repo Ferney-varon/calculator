@@ -69,4 +69,17 @@ npm test
 - **[High-Level Architecture](./ARCHITECTURE.md):** Learn about the business logic and layer separation.
 - **[Backend API Documentation](./backend/API.md):** Details on the RESTful endpoints and payload structures.
 - **[Frontend Components](./frontend/src/components/README.md):** Information about the React component structure.
-- **Continuous Integration:** The repository includes a GitHub Actions workflow (`.github/workflows/ci.yml`) that automatically runs linting, unit tests, frontend builds, and tests the docker-compose image compilation on every push or pull request to `main`.
+
+---
+
+## 🔄 Continuous Integration (CI)
+
+We implemented a robust Continuous Integration pipeline using **GitHub Actions** (`.github/workflows/ci.yml`) because **we needed a strict, automated way to validate code quality and application stability** before any changes are merged. 
+
+On every push or pull request to the `main` branch, the CI pipeline automatically:
+1. **Validates Formatting & Syntax:** Runs `eslint` and strict TypeScript checks (`tsc`) to catch early bugs.
+2. **Validates Business Logic:** Executes all Vitest unit tests across both the frontend and backend.
+3. **Validates Build Integrity:** Compiles the Vite production build to ensure the frontend bundles successfully.
+4. **Validates Containerization:** Runs `docker compose build` to ensure the Docker environments are healthy and deployment-ready.
+
+This ensures that our codebase remains consistently deployable and bug-free!
