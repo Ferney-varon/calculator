@@ -20,11 +20,17 @@ To ensure the application remains stable and buildable:
   - `build`: Validates the TypeScript and Vite build phase for the frontend.
   - `docker-build`: Tests the Dockerfiles by running `docker compose build` to verify the containerization works without issues.
 
-## UI Refinements & Advanced Layout (Pending)
-- [ ] Fix display overflow on long numbers (truncate with ellipsis and scale down text).
-- [ ] Redesign advanced operations layout to expand horizontally (new column on the right).
-- [ ] Ensure new advanced operations (`^`, `√`, `%`) use the yellow `btn-operator` style.
-- [ ] Implement smooth responsive resizing for the container width.
+## UI Refinements & Advanced Layout (Completed)
+- [x] Fix display overflow on long numbers (truncate with ellipsis).
+- [x] Redesign advanced operations layout to expand horizontally (new column on the right).
+- [x] Ensure new advanced operations (`^`, `√`, `%`) use the yellow `btn-operator` style.
+- [x] Implement smooth responsive resizing for the container width.
+- [x] Convert keypad rows to CSS Grid to fix button misalignment (`.btn-zero`).
+
+## Advanced Operations (Completed)
+- [x] Backend: Add endpoints and logic for exponentiation (`/exponentiate`), square root (`/sqrt`), and binary percentage (`/percentage`).
+- [x] Frontend: Wire up new API calls and integrate into `useCalculator` hook state.
+- [x] UI: Add toggle button for advanced layout.
 
 ## Checklist for Validation
 
@@ -48,8 +54,13 @@ To ensure the application remains stable and buildable:
 - [x] DevOps: `Dockerfile` created for the backend.
 - [x] DevOps: `Dockerfile` created for the frontend.
 
-### CI/CD Requirements (Pending Execution)
-- [ ] CI: Create `.github/workflows/ci.yml`.
-- [ ] CI: Configure Node environment and dependency caching.
-- [ ] CI: Add steps for backend tests and frontend tests/build.
-- [ ] CI: Add step to execute `docker compose build`.
+### CI/CD Requirements (Completed)
+- [x] CI: Create `.github/workflows/ci.yml`.
+- [x] CI: Configure Node environment and dependency caching.
+- [x] CI: Add steps for backend tests and frontend tests/build.
+- [x] CI: Add step to execute `docker compose build`.
+
+### Recent Bug Fixes (Completed)
+- [x] Replace `npm ci` with `npm install` in CI workflow to fix Vite/esbuild lockfile platform mismatches.
+- [x] Fix strict TypeScript compilation errors (`@types/cors` in backend, Vitest configs in frontend).
+- [x] Resolve `eslint` warnings in `useCalculator` regarding unused imports and `any` types.
