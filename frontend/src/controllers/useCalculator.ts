@@ -74,8 +74,9 @@ export const useCalculator = () => {
           setDisplayValue(String(result.result));
           setPreviousValue(String(result.result));
         }
-      } catch (err: any) {
-        setError(err.response?.data?.message || 'An error occurred');
+      } catch (err: unknown) {
+        const axiosError = err as { response?: { data?: { message?: string } } };
+        setError(axiosError.response?.data?.message || 'An error occurred');
         setDisplayValue('Error');
       } finally {
         setIsLoading(false);
@@ -106,8 +107,9 @@ export const useCalculator = () => {
         setDisplayValue(String(result.result));
         setWaitingForNewValue(true);
       }
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'An error occurred');
+    } catch (err: unknown) {
+      const axiosError = err as { response?: { data?: { message?: string } } };
+      setError(axiosError.response?.data?.message || 'An error occurred');
       setDisplayValue('Error');
     } finally {
       setIsLoading(false);

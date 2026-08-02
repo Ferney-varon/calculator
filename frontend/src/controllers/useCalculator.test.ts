@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import { useCalculator } from './useCalculator';
-import { calculatorApi } from '../services/api';
 
 // Mock the API service
 vi.mock('../services/api', () => ({
